@@ -50,11 +50,12 @@ exports.update = function(req, res) {
             return common.send(res, 400, '', err);
         }
         else{
-            console.log(_vote.candidacyName);
+            
             if (_vote == undefined || _vote == null) {
                 return common.send(res, 300, '', 'Undefined user');
             }
             else{
+                console.log(_vote.candidacyName);
                 Governor.findOne({ userCode: req.body.userCode }, async function ( err, _governor){
                     if(err){
                         return common.send(res, 400, '', err);

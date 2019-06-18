@@ -1,5 +1,7 @@
 .container {
     border: 1px solid red;
+    display: flex;
+    flex-direction: row;
 }
 
 .govWrapper {
@@ -9,3 +11,21 @@
     border: 1px solid yellow;
 }
 
+.ddWrapper {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.btnModal {
+    margin-top: 20px;
+    color: black;
+    padding: 8px 20px;
+    border-radius: 5px;
+}
+
+.chatWrapper {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}

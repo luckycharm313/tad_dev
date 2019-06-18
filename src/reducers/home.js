@@ -1,4 +1,13 @@
-import { WEB3_CONNECTED, CONTRACT_INSTANTIATED, FETCHED_CONTRACT, HOME_GOV_AND_TAX, HOME_ERROR, defaultState } from '../actions/home';
+import { 
+  WEB3_CONNECTED, 
+  CONTRACT_INSTANTIATED, 
+  FETCHED_CONTRACT, 
+  HOME_GOV_AND_TAX, 
+  HOME_ERROR, 
+  HOME_UPDATE_GOV,
+  HOME_UPDATE_TAX,
+  defaultState 
+} from '../actions/home';
 
 const home = (state = defaultState, action) => {
   switch (action.type) {
@@ -26,6 +35,24 @@ const home = (state = defaultState, action) => {
       govTax: action.payload.govTax,
       tadTax: action.payload.tadTax
     };
+  case HOME_UPDATE_GOV:
+    return {
+      ...state,
+      governors: action.payload,
+    };
+  case HOME_UPDATE_TAX:
+    if(action.payload.index == 1 ){
+      return {
+        ...state,
+        tadTax: action.payload.tax,
+      };
+    }
+    else{
+      return {
+        ...state,
+        govTax: action.payload.tax,
+      };
+    }    
   case HOME_ERROR:
     return {
       ...state,

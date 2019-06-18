@@ -6,6 +6,8 @@ export const WEB3_DISCONNECTED = 'WEB3_DISCONNECTED';
 export const CONTRACT_INSTANTIATED = 'CONTRACT_INSTANTIATED';
 export const FETCHED_CONTRACT = 'FETCHED_CONTRACT';
 export const HOME_GOV_AND_TAX = 'HOME_GOV_AND_TAX';
+export const HOME_UPDATE_GOV = 'HOME_UPDATE_GOV';
+export const HOME_UPDATE_TAX = 'HOME_UPDATE_TAX';
 export const HOME_ERROR = 'HOME_ERROR';
 
 import {SimpleStorageContract, Backend_EndPoint} from '../constants';
@@ -19,7 +21,6 @@ export const defaultState = {
   totalSupply: 0,
   governors: [],
   error: null,
-
 };
 
 export function web3connect() {
@@ -102,35 +103,57 @@ export function loadGovAndTax() {
   };
 }
 
-// export function instantiateTodoContract() {
-//   return (dispatch, getState) => {
-//     const web3 = getState().web3;
-//     const todos = contract(TodosContract);
-//     todos.setProvider(web3.currentProvider);
-//     return todos.deployed().then((todosContract) => {
-//       dispatch({
-//         type: TODOS_CONTRACT_INSTANTIATED,
-//         payload: todosContract
-//       });
-//     });
-//   };
-// }
+export function updateGov(id, userCode) {
+  return async (dispatch, getState) => {
+    try {
+      var governors = await ApiProvider(Backend_EndPoint + "api/governor/update/", "POST", {id, userCode});
+      dispatch({
+        type: HOME_UPDATE_GOV,
+        payload: governors.payload
+      });
+    } catch (error) {
+      dispatch({
+        type: HOME_ERROR,
+        payload: error
+      });
+    };
+  };
+}
 
+export function updateTax(index, value) {
+  return async (dispatch, getState) => {
+    try {
+      var tax = index == 1? await ApiProvider(Backend_EndPoint + "api/tax/setTadTax/", "POST", {
+        tadTax: value,
+      }) 
+      : await ApiProvider(Backend_EndPoint + "api/tax/setGovTax/", "POST", {
+        govTax: value,
+      });
+      dispatch({
+        type: HOME_UPDATE_TAX,
+        payload: {
+          tax: value,
+          index,
+        }
+      });
+    } catch (error) {
+      dispatch({
+        type: HOME_ERROR,
+        payload: error
+      });
+    };
+  };
+}
 
-
-// export function addTodo(payload) {
-//   return (dispatch, getState) => {
-//     const web3 = getState().web3;
-//     const todosContract = getState().todosContract;
-//     web3.eth.getAccounts((err, accounts) => {
-//       todosContract.addTodo(web3.fromAscii(payload), {
-//         from: accounts[0]
-//       }).then((results) => {
-//         dispatch({
-//           type: TODO_ADDED,
-//           payload
-//         });
-//       });
-//     });
-//   };
-// }
+export function postMessage(params) {
+  return async (dispatch, getState) => {
+    try {
+      await ApiProvider(Backend_EndPoint + "api/message/send", "POST", params);
+    } catch (error) {
+      dispatch({
+        type: HOME_ERROR,
+        payload: error
+      });
+    };
+  };
+}

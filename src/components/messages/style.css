@@ -1,0 +1,10 @@
+.main-container{
+    padding: 15px 10px;
+}
+
+.body-red{background-color: #9e2f2f; padding-top: 10px; padding-bottom: 10px;}
+.text-white{ font-size: 14px; color: white; font-weight: 600; }
+.text-message-white{ border: 2px solid white; width: 100%; }
+.btn-submit-white{border: none; font-size: 13px; background-color: transparent;color: white;font-weight: 600;}
+.body-grey{background-color: grey; padding-top: 10px; padding-bottom: 10px;}
+.body-blue{background-color: #464690; padding-top: 10px; padding-bottom: 10px;}

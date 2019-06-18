@@ -11,45 +11,41 @@ import '../../css/oswald.css';
 import '../../css/open-sans.css';
 import '../../css/pure-min.css';
 import '../../App.css';
-import './style.css';
 
-export default class Govenors extends Component {
+export default class Currency extends Component {
   constructor(props) {
     super(props)
   }
 
   actionGovCell = (cellInfo) => {      
     return (
-        <FontAwesomeIcon size='lg' color='white' icon='edit' onClick={()=>this.props.handleOpen(0, cellInfo.original)} />
+        <FontAwesomeIcon size='lg' color='white' icon='edit' /*onClick={()=>this.props.handleOpen(0, cellInfo.original)} *//>
     );
   }
 
-  render() {
+  render() {      
     return (        
         <div className='box'>
-            <h2>GOVENORS</h2>
+            <h2>$ VALUES</h2>
             <ReactTable
-                data={this.props.governors}
+                data={this.props.currencies}
                 noDataText='No data available!'
                 columns={[
                     {
-                        Header: 'STATE',
-                        accessor: 'state',
+                        Header: 'CURRENCY',
+                        accessor: 'currency',
                     },
                     {
-                        Header: 'GAMER CODE',
-                        accessor: 'userCode'
-                    },
-                    {
-                        Header: 'NAME',
-                        accessor: 'userName'
+                        Header: 'PRICE',
+                        accessor: 'price'
                     },
                     {
                         Header: 'ACTION',
                         Cell: this.actionGovCell
                     },
                 ]}
-                defaultPageSize={10}
+                defaultPageSize={5}
+                showPagination ={false}
                 className='-striped -highlight orgTable'
             />
         </div>

@@ -61,13 +61,13 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-https-redirect": "^1.1.0",
+    "react-modal": "^3.8.1",
     "react-redux": "5.0.6",
     "react-router-dom": "^5.0.1",
     "react-table": "^6.7.6",
     "react-textarea-autosize": "^7.1.0",
     "redux": "3.7.2",
     "redux-thunk": "2.2.0",
-    "semantic-ui-react": "^0.87.1",
     "truffle-hdwallet-provider": "^1.0.2"
   },
   "scripts": {

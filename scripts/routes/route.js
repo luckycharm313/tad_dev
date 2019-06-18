@@ -2,6 +2,7 @@ var express = require('express');
 var fs = require('fs');
 var router = express.Router();
 var mongoose = require('mongoose');
+var common = require('./common');
 
 var governorSchema = require('../models/governors').governorSchema;
 var userSchema = require('../models/servers').userSchema;
@@ -148,7 +149,7 @@ router.post("/updateGovs", function(req, res) {
 router.get("/getJackpot", function(req, res) {
     var Jackpot = mongoose.model("Jackpot", jackpotSchema);
     Jackpot.find({}, function(err, data) {
-        return res.send(data);
+        return common.send(res, 200, data, '');
     });
 });
 

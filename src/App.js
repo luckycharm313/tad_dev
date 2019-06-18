@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-ro
 import HttpsRedirect from 'react-https-redirect';
 import './App.css';
 
-import Home from './containers/home/home';
+import Home from './containers/home';
+import Lottery from './containers/lottery';
+import Auction from './containers/auction';
 
 class App extends Component {
   render() {
@@ -24,8 +26,8 @@ class App extends Component {
                     <div className='App-intro'>
                         <Switch>
                             <Route exact path='/'  component={Home} />
-                            <Route path='/lottery'  component={Home} />
-                            <Route path='/auction'  component={Home} />
+                            <Route path='/lottery'  component={Lottery} />
+                            <Route path='/auction'  component={Auction} />
                             <Redirect to='/' />
                         </Switch>
                     </div>
