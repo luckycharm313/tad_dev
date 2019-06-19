@@ -31,7 +31,19 @@ class Auction extends Component {
     
     return (
       <div className='containers'>
-        
+            <div className='row'>
+                <div className='box col-md-6'>
+                </div>
+                <div className='box col-md-6'>
+                </div>
+            </div>
+            <div className='row'>
+                <div className='box col-md-4'>
+                    <h2>CREATE ITEM</h2>
+                </div>
+                <div className='box col-md-8'>
+                </div>
+            </div>
       </div>
     );
   }

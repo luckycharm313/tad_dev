@@ -24,6 +24,7 @@ class Lottery extends Component {
         isEditJackPot: false,
         jackpot: 0,
         scratcherNumbers: [],
+        payout: 0,
     }
   }
   componentDidMount() {
@@ -51,7 +52,11 @@ class Lottery extends Component {
   }
 
   setNumbers = () => {
-      this.props.setWinnerNumber(this.state.winningNumbers);
+      var arr = [0, 0, 0, 0, 0, 0];
+      for (var x = 0; x < 6; x++) {
+        arr[x] = parseInt(this.state.winningNumbers[x]);
+      }
+      this.props.setWinnerNumber(arr, this.state.payout);
   }
 
   editJackPot = () =>{
@@ -67,13 +72,13 @@ class Lottery extends Component {
   getMatchingElementCount(left, right) {
     let clonedLeft = []
     left.forEach(element => {
-      clonedLeft.push(element)
+      clonedLeft.push(parseInt(element))
     })
 
     let matchedCount = 0
     right.forEach(element => {
       //find matching index
-      let matchedIndex = clonedLeft.indexOf(element)
+      let matchedIndex = clonedLeft.indexOf(parseInt(element))
 
       if (matchedIndex !== -1) {
         clonedLeft.splice(matchedIndex, 1)
@@ -84,7 +89,7 @@ class Lottery extends Component {
     return matchedCount
   }
 
-  calcPayout(winningNumbers) {
+  calcPayout = (winningNumbers) => {
     var isLevel = 0;
     var payout = 0;
     this.props.ticketList.forEach(ticket => {
@@ -111,6 +116,7 @@ class Lottery extends Component {
       payout = (parseInt(this.props.jackpot.value, 10) * 0.01).toFixed(2);
     }
 
+    this.setState({payout});
     return payout;
   }
 
@@ -119,12 +125,14 @@ class Lottery extends Component {
     for (var x = 0; x < 6; x++) {
       arr[x] = (Math.random() * 50).toFixed(0);
     }
+    this.calcPayout(arr);
     this.setState({ winningNumbers: arr });
   }
 
   winningNumberUp = (val)=> {
     var arr = this.state.winningNumbers;
     arr[val] = (parseInt(arr[val], 10) + parseInt(1, 10)) % 51;
+    this.calcPayout(arr);
     this.setState({ winningNumbers: arr });
   }
 
@@ -134,6 +142,7 @@ class Lottery extends Component {
     else {
       arr[val] = 50;
     }
+    this.calcPayout(arr);
     this.setState({ winningNumbers: arr });
   }
 
@@ -190,7 +199,7 @@ class Lottery extends Component {
                         <div className='box payout'>
                             <h2>PROJECTED PAYOUT</h2>
                             <div style={{ padding: '5px', textAlign: 'center' }}>
-                            <h2><span style={{color:'#d8d51a'}}>$&nbsp;&nbsp;</span>{this.calcPayout(this.state.winningNumbers)}</h2>
+                            <h2><span style={{color:'#d8d51a'}}>$&nbsp;&nbsp;</span>{this.state.payout}</h2>
                             </div>
                         </div>
                         <div className='box payout'>

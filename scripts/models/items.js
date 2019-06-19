@@ -3,11 +3,11 @@ var mongoose = restful.mongoose;
 
 
 var itemSchema = new mongoose.Schema({
-  name: String,
-  price: Number,
-  property1: String,
-  property2: String,
-  category: String,
+  itemName: String,
+  itemCategory: String,
+  price: {type: Number, default: 0},
+  totalQuantity: {type: Number, default: 0},
+  buyableQuantity: {type: Number, default: 0},
   someId: mongoose.Schema.Types.ObjectId,
 });
 

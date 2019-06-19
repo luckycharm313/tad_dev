@@ -9,6 +9,7 @@ var auctionSchema = new mongoose.Schema({
   minPrice: {type: Number, default: 0},
   bidPrice: {type: Number, default: 0},
   winnerPrice: {type: Number, default: 0},
+  isBuy: {type: Number, default: 0}, // 0: default, 1: bought
   ownerGamerCode: String, //coinbase
   ownerName: String, //coinbase
   biderGamerCode: String, //coinbase

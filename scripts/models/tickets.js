@@ -8,6 +8,7 @@ var ticketSchema = new mongoose.Schema({
   userCode: String,
   numbers: [],
   winingNumbers:[],
+  payout: Number,
   isWinner: {type: Boolean, default: false},
   createdAt: String,
 });

@@ -108,3 +108,11 @@ h1, h2, h3 {
   width: 16.6666%;
   margin: 10px;
 }
+.col-md-4 {
+  width: 33.3333%;
+  margin: 10px;
+}
+.col-md-8 {
+  width: 66.6666%;
+  margin: 10px;
+}

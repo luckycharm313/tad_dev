@@ -96,10 +96,15 @@ exports.setWinnerNumber =  function(req, res) {
     if (req.body.winningNumbers == undefined) {
         return common.send(res, 401, '', 'winningNumbers is undefined');
     }
+    
+    if (req.body.payout == undefined) {
+        return common.send(res, 401, '', 'payout is undefined');
+    }
 
     var createAt = Math.round(new Date().getTime()/1000);
     var newTicket = new Ticket({
         winingNumbers: req.body.winningNumbers,
+        payout: req.body.payout,
         createdAt: createAt
     });
 
@@ -116,7 +121,7 @@ exports.setWinnerNumber =  function(req, res) {
 exports.lastWinningNumber =  function(req, res) {
     var Ticket = mongoose.model("Ticket", ticketSchema);
 
-    Ticket.findOne({"winingNumbers": {$ne:[]}}, ['winingNumbers', 'createdAt']).sort({'createdAt': -1}).exec(function(err, data){
+    Ticket.findOne({"winingNumbers": {$ne:[]}}, ['winingNumbers', 'payout', 'createdAt']).sort({'createdAt': -1}).exec(function(err, data){
         if(err){
             return common.send(res, 400, '', err);
         }

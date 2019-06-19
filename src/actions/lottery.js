@@ -42,11 +42,11 @@ export function loadWinningJackpotTicketScratcher() {
     };
   };
 }
-export function setWinnerNumber(numbers) {
+export function setWinnerNumber(numbers, payout) {
 
     return async (dispatch, getState) => {
         try {
-            var winningNumbers = await ApiProvider(Backend_EndPoint + "api/lottery/setWinnerNumber", "POST", {winningNumbers: numbers});
+            var winningNumbers = await ApiProvider(Backend_EndPoint + "api/lottery/setWinnerNumber", "POST", {winningNumbers: numbers, payout});
             dispatch({
                 type: LOTTERY_UPDATE_WINNER,
                 payload: {
