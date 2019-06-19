@@ -1,5 +1,5 @@
 
-export const LOTTERY_ERROR = 'HOME_ERROR';
+export const LOTTERY_ERROR = 'LOTTERY_ERROR';
 export const LOTTERY_W_J_T_S = 'LOTTERY_W_J_T_S';
 export const LOTTERY_UPDATE_WINNER = 'LOTTERY_UPDATE_WINNER';
 

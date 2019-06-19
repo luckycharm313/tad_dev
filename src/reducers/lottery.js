@@ -5,7 +5,7 @@ import {
     defaultState 
   } from '../actions/lottery';
   
-  const home = (state = defaultState, action) => {
+  const lottery = (state = defaultState, action) => {
     switch (action.type) {
         case LOTTERY_W_J_T_S:
             return {
@@ -31,4 +31,4 @@ import {
         }
   };
   
-  export default home;
+  export default lottery;

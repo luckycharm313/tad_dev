@@ -1,0 +1,34 @@
+.containers {
+
+}
+.form-group {
+    padding: 20px 10px;
+}
+.form-control {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 15px 0;
+}
+.form-label {
+    color: #ffffff;
+}
+.Dropdown-control {
+    
+}
+.dropdown {
+    flex: 1;
+    margin-left: 10px;
+}
+.input {
+    flex: 1;
+    margin-left: 60px;
+    padding: 7px 10px;
+    border-radius: 3px;
+}
+.btn-wrapper {
+    margin: 30px auto;
+}
+.btn-wrapper button {
+    width: 200px;
+}
