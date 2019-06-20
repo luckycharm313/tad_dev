@@ -27,6 +27,7 @@ export default class Tickets extends Component {
         <ReactTable
             data={this.props.ticketList}
             noDataText='No data available!'
+            getTrProps={(s, r, c) => this.props.trClassFormat(s, r, c)}
             columns={[
                 {
                     Header: 'USER',

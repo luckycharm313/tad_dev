@@ -54,3 +54,9 @@
 .payout {
     margin-top: 20px; 
 }
+.vertical-center {
+    align-items: center;
+}
+.winners {
+    margin-bottom: 30px;
+}

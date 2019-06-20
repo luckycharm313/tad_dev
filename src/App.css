@@ -55,6 +55,9 @@ h1, h2, h3 {
 .menu li a:hover {
   color: rgb(216, 213, 26);
 }
+.activeNav {
+  color: rgb(216, 213, 26) !important;
+}
 .App-intro {
   margin-top: 10px;
 }
@@ -83,12 +86,19 @@ h1, h2, h3 {
 
 .orgTable .pagination-bottom {
   margin-top: 15px;
-  background-color: #ea5e5eab;
-  color: black;
+  background-color: 'transparent';
+  color: white;
+}
+.ReactTable .-pagination .-btn  {
+  color: white !important;
+}
+.ReactTable .-pagination input, .ReactTable .-pagination select {
+  color: black !important;
 }
 .row {
   display: flex;
   flex-direction: row;
+  /* align-items: flex-start; */
   padding: 15px;
   margin: 10px 0;
 }
@@ -112,7 +122,19 @@ h1, h2, h3 {
   width: 33.3333%;
   margin: 10px;
 }
+.col-md-5 {
+  width: 41.6666%;
+  margin: 10px;
+}
+.col-md-7 {
+  width: 58.3333%;
+  margin: 10px;
+}
 .col-md-8 {
   width: 66.6666%;
+  margin: 10px;
+}
+.col-md-9 {
+  width: 75%;
   margin: 10px;
 }

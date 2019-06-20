@@ -78,7 +78,7 @@ exports.result = function(req, res) {
 
 exports.setPeroid = function(req, res){
     var Elections = mongoose.model("Elections", electionSchema);
-
+    var Votes = mongoose.model("Votes", voteSchema);
     if (req.body.startTime == undefined) {
         return common.send(res, 401, '', 'startTime is undefined');
     }
@@ -92,15 +92,22 @@ exports.setPeroid = function(req, res){
             return common.send(res, 400, '', err);
         }
         else{
-            var _temp = {};
-            _temp.startTime = req.body.startTime;
-            _temp.endTime = req.body.endTime;            
-
-            Elections.insertMany(_temp, function (err, data) {
-                if (err){ 
+            Votes.remove({}, function(err){
+                if(err){
                     return common.send(res, 400, '', err);
-                } else {                    
-                    return common.send(res, 200, data, 'Success');
+                }
+                else{
+                    var _temp = {};
+                    _temp.startTime = req.body.startTime;
+                    _temp.endTime = req.body.endTime;            
+
+                    Elections.insertMany(_temp, function (err, data) {
+                        if (err){ 
+                            return common.send(res, 400, '', err);
+                        } else {                    
+                            return common.send(res, 200, data, 'Success');
+                        }
+                    });
                 }
             });
         }

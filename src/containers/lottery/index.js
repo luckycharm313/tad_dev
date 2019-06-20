@@ -37,6 +37,31 @@ class Lottery extends Component {
     }
   }
 
+  trClassFormat = (state, rowData, column)=> {
+    if(rowData != undefined) {
+        var level = this.getTicketLevel(rowData.original.numbers);
+        if(level == 6){
+            return {style: { backgroundColor : 'red'}};
+        }
+        else if(level == 5){
+            return {style: { backgroundColor : '#464690'}};
+        }
+        else if( level == 4){
+            return {style: { backgroundColor : 'grey'}};
+        }
+        else{
+            return {style: { backgroundColor : 'transparent'}};
+        }
+    }
+    else{
+        return {style: { backgroundColor : 'transparent'}};
+    }    
+  }
+  
+  getTicketLevel = (ticket) => {
+    return this.getMatchingElementCount(ticket, this.state.winningNumbers)
+  }
+
   onChangeScratcher = (event, index) => {
     var arr = this.props.scratcherNumbers;
     arr[index] = event.target.value;
@@ -158,7 +183,7 @@ class Lottery extends Component {
                 <h2>LOTTO</h2>
                 <div className='row'>
                     <div className='col-md-6'>
-                        <Tickets ticketList={this.props.ticketList}/>
+                        <Tickets ticketList={this.props.ticketList} trClassFormat={(s, r, c)=>this.trClassFormat(s, r, c)}/>
                     </div>
                     <div className='col-md-6'>
                         <div className='text-align-center'>
@@ -213,7 +238,7 @@ class Lottery extends Component {
                             ', '+this.props.lastWinningNumber[5]
                             }</h2>
                             </div>
-                        </div>    
+                        </div> 
                     </div>
                 </div>                
             </div>
@@ -249,11 +274,17 @@ class Lottery extends Component {
                 </div>
                 <div className="box col-md-6">
                     <h2>SCRATCHER</h2>
-                    <div className="row">
-                        <div className="col-md-6">
+                    <div className="row vertical-center">
+                        <div className="col-md-7">
+                            <div className='box winners'>
+                                <h2>WINNERS</h2>
+                                <div style={{ padding: '5px', textAlign: 'center' }}>
+                                    <h2>{this.props.scratcherList.length}</h2>
+                                </div>
+                            </div>
                             <ScratcherWinners scratcherList={this.props.scratcherList}/>
                         </div>
-                        <div className="col-md-6">
+                        <div className="col-md-5">
                             <Scratcher 
                                 scratcherNumbers={this.props.scratcherNumbers}
                                 onChangeScratcher={(e, value)=>this.onChangeScratcher(e, value)}
