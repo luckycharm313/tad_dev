@@ -6,6 +6,7 @@ var governor = require('./governor');
 var message = require('./message');
 var auction = require('./auction');
 var lottery = require('./lottery');
+var item = require('./item');
 var tax = require('./tax');
 /***
  * common apis
@@ -46,5 +47,11 @@ router.get("/tax/getGovTax", tax.getGovTax);
 router.post("/tax/setGovTax", tax.setGovTax);
 router.get("/tax/getTadTax", tax.getTadTax);
 router.post("/tax/setTadTax", tax.setTadTax);
+
+
+router.post("/item/post", item.post);
+router.get("/item/get", item.get);
+router.post("/item/buy", item.buy);
+router.get("/item/track", item.track);
 
 module.exports = router;

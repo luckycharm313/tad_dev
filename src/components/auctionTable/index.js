@@ -6,6 +6,7 @@ import '../../css/oswald.css';
 import '../../css/open-sans.css';
 import '../../css/pure-min.css';
 import '../../App.css';
+import './style.css';
 
 export default class AuctionTable extends Component {
   constructor(props) {

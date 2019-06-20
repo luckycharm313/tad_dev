@@ -1,0 +1,10 @@
+div.rt-td, div.rt-th { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.rt-td:not(:nth-child(5)){
+    word-wrap: break-word !important;
+    white-space: pre-wrap !important;
+}

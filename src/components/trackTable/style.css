@@ -1,0 +1,9 @@
+div.rt-td, div.rt-th { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+div.rt-td:nth-child(1), div.rt-td:nth-child(2), div.rt-td:nth-child(3) {
+    word-wrap: break-word !important;
+    white-space: pre-wrap !important;
+}

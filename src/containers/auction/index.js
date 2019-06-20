@@ -12,7 +12,7 @@ import AuctionTable from '../../components/auctionTable';
 import ItemTable from '../../components/itemTable';
 import TrackTable from '../../components/trackTable';
 
-import {} from '../../actions/lottery';
+import {updateCategory, setItem, loadData} from '../../actions/auction';
 import '../../css/oswald.css';
 import '../../css/open-sans.css';
 import '../../css/pure-min.css';
@@ -25,22 +25,40 @@ class Auction extends Component {
     this.state = {
         itemPrice: 0,
         itemQuantity: 0,
+        itemCategory: '',
+        itemName: '',
+        itemId: 0,
     }
   }
   componentDidMount() {
-    
+    this.props.loadData();
   }
 
-  onHandleCategory = () => {
-
+  onHandleCategory = (e) => {
+    this.setState({itemCategory: e.label, itemName: ''});
+    this.props.updateCategory(e.label);
   }
 
-  onHandleItem = () => {
-
+  onHandleItem = (e) => {
+    this.setState({itemName: e.label, itemId: e.value});
   }
 
   setItem = () => {
-
+    if(this.state.itemPrice == 0 || this.state.itemQuantity == 0 || this.state.itemName == '' || this.state.itemCategory == ''){
+        alert("Please Input all options!");
+    }
+    else{
+        var params = {
+            'id': this.state.itemId,
+            'itemName': this.state.itemName,
+            'itemCategory': this.state.itemCategory,
+            'price': this.state.itemPrice,
+            'quantity': this.state.itemQuantity,
+        };
+    
+        this.props.setItem(params);
+        this.setState({itemName: '', itemCategory: '', itemPrice: 0, itemQuantity: 0, itemId: 0});
+    }    
   }
 
   render() {
@@ -69,8 +87,8 @@ class Auction extends Component {
                             <Dropdown 
                                 options={this.props.categories} 
                                 onChange={this.onHandleCategory} 
-                                value={''}
-                                placeholder="Select an category"
+                                value={this.state.itemCategory}
+                                placeholder="Select a category"
                                 className='dropdown'
                             />
                         </div>
@@ -79,7 +97,7 @@ class Auction extends Component {
                             <Dropdown 
                                 options={this.props.items} 
                                 onChange={this.onHandleItem} 
-                                value={''}
+                                value={this.state.itemName}
                                 placeholder="Select an item"
                                 className='dropdown'
                             />
@@ -118,6 +136,9 @@ class Auction extends Component {
 }
 
 const mapDispatchToProps = {
+    updateCategory,
+    setItem,
+    loadData,
 };
 
 const mapStateToProps = ({auction}) => ({
