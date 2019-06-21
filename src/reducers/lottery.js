@@ -22,6 +22,7 @@ import {
                 lastWinningNumber: action.payload.lastWinningNumber,
             };  
         case LOTTERY_ERROR:
+            alert(action.payload);
             return {
                 ...state,
                 error: action.payload

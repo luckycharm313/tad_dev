@@ -172,10 +172,7 @@ class Lottery extends Component {
   }
 
   render() {
-    if(this.props.error){
-      alert(this.props.error);
-    }
-    
+        
     return (
       <div className='containers'>
         <div className='lottWrapper'>

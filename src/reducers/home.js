@@ -54,6 +54,7 @@ const home = (state = defaultState, action) => {
       };
     }    
   case HOME_ERROR:
+    alert(action.payload);
     return {
       ...state,
       error: action.payload

@@ -116,10 +116,6 @@ class Home extends Component {
   }
 
   render() {
-    if(this.props.error){
-      alert(this.props.error);
-    }
-
     return (
       <div className='container'>
         <div className='govWrapper'>          

@@ -8,6 +8,7 @@ import {
   const auction = (state = defaultState, action) => {
     switch (action.type) {          
         case AUCTION_ERROR:
+            alert(action.payload);
             return {
                 ...state,
                 error: action.payload
