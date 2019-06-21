@@ -2,6 +2,7 @@
 export const AUCTION_ERROR = 'AUCTION_ERROR';
 export const AUCTION_UPDATE_ITEM = 'AUCTION_UPDATE_ITEM';
 export const AUCTION_LOAD_DATA = 'AUCTION_LOAD_DATA';
+export const AUCTION_LOAD_ITEM = 'AUCTION_LOAD_ITEM';
 
 import {Backend_EndPoint, ItemInfos} from '../constants';
 import { ApiProvider } from '../ApiProvider';
@@ -53,7 +54,7 @@ export function setItem(params) {
             await ApiProvider(Backend_EndPoint + "api/item/post", "POST", params);
             var item = await ApiProvider(Backend_EndPoint + "api/item/get", "GET", null);
             dispatch({
-                type: AUCTION_LOAD_DATA,
+                type: AUCTION_LOAD_ITEM,
                 payload: {
                     itemList: item.payload,
                 }

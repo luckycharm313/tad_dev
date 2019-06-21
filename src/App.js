@@ -21,7 +21,6 @@ class App extends Component {
 
     render() {
         const activeStyle = { color: 'rgb(216, 213, 26)' };
-        console.log("ss", this.props.location)
         return (
             <Router>
                 <div className='app'>

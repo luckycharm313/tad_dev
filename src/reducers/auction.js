@@ -2,6 +2,7 @@ import {
     AUCTION_ERROR,
     AUCTION_UPDATE_ITEM,
     AUCTION_LOAD_DATA,
+    AUCTION_LOAD_ITEM,
     defaultState 
   } from '../actions/auction';
   
@@ -24,6 +25,11 @@ import {
                 itemList: action.payload.itemList,
                 trackList: action.payload.trackList,
                 auctionList: action.payload.auctionList,
+            };
+        case AUCTION_LOAD_ITEM:
+            return {
+                ...state,
+                itemList: action.payload.itemList
             };
         default:
             return state
