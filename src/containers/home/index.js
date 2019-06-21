@@ -43,7 +43,7 @@ class Home extends Component {
       isGovOpen: false,
       isTaxOpen: false,
       taxIndex: 1,
-      userCode: null,
+      userName: '',
       govId: null,
       taxValue: null,
       addAmount: 0,
@@ -76,7 +76,7 @@ class Home extends Component {
 
   btnChange = (e) => {
     if( e == 0){
-      this.props.updateGov(this.state.govId, this.state.userCode);      
+      this.props.updateGov(this.state.govId, this.state.userName);      
     }
     else{
       this.props.updateTax(this.state.taxIndex, this.state.taxValue);
@@ -91,7 +91,7 @@ class Home extends Component {
 
   handleOpen = (e, param) => {
     if(e == 0 ){
-      this.setState({isGovOpen: true, userCode: param.userCode, govId: param._id});
+      this.setState({isGovOpen: true, userName: param.userName, govId: param._id});
     }
     else{
       this.setState({isTaxOpen: true, taxIndex: e, taxValue: param});
@@ -154,10 +154,10 @@ class Home extends Component {
             style={customStyles}
             ariaHideApp={false}
           >
-          <h2>Set GOVERNOR</h2>
+          <h2>Set GOVERNOR'S NAME</h2>
           <input
-            onChange={(event)=>this.setState({ userCode: event.target.value})}
-            value={this.state.userCode}
+            onChange={(event)=>this.setState({ userName: event.target.value})}
+            value={this.state.userName}
             style={{ backgroundColor: "grey", border: "none", borderRadius: "4px", padding: 10, width:"50%" }} />
           <br />
           <button className='btnModal' onClick={() => this.btnChange(0)}>SET</button>

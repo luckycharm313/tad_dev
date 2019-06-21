@@ -103,10 +103,10 @@ export function loadGovAndTax() {
   };
 }
 
-export function updateGov(id, userCode) {
+export function updateGov(id, userName) {
   return async (dispatch, getState) => {
     try {
-      var governors = await ApiProvider(Backend_EndPoint + "api/governor/update/", "POST", {id, userCode});
+      var governors = await ApiProvider(Backend_EndPoint + "api/governor/update/", "POST", {id, userName});
       dispatch({
         type: HOME_UPDATE_GOV,
         payload: governors.payload

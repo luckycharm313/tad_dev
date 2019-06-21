@@ -41,61 +41,45 @@ exports.update = function(req, res) {
     if (req.body.id == undefined) {
         return common.send(res, 401, '', 'Id is undefined');
     }
-    if (req.body.userCode == undefined) {
-        return common.send(res, 401, '', 'UserCode is undefined');
+    if (req.body.userName == undefined && req.body.userName == '') {
+        return common.send(res, 401, '', 'UserName is undefined or empty');
     }
 
-    Votes.findOne({ candidacyCode: req.body.userCode }, ['candidacyName'], async function(err, _vote) {
+    Governor.findOne({ userName: req.body.userName }, async function ( err, _governor){
         if(err){
             return common.send(res, 400, '', err);
         }
         else{
-            
-            if (_vote == undefined || _vote == null) {
-                return common.send(res, 300, '', 'Undefined user');
-            }
-            else{
-                console.log(_vote.candidacyName);
-                Governor.findOne({ userCode: req.body.userCode }, async function ( err, _governor){
+            if(_governor == undefined || _governor == null){
+                Governor.findOne({ _id: req.body.id }, async function ( err, _g){
                     if(err){
                         return common.send(res, 400, '', err);
                     }
                     else{
-                        if(_governor == undefined || _governor == null){
-                            Governor.findOne({ _id: req.body.id }, async function ( err, _g){
+                        if (_g == undefined || _g == null) {
+                            return common.send(res, 300, '', 'Undefined user.');
+                        } else {
+                            _g.userName = req.body.userName;
+                            await _g.save();
+                            Governor.find({}, ['userName', 'userCode', 'state']).sort({state: 1}).exec( function(err, result) {
                                 if(err){
                                     return common.send(res, 400, '', err);
                                 }
                                 else{
-                                    if (_g == undefined || _g == null) {
-                                        return common.send(res, 300, '', 'Undefined user.');
-                                    } else {
-                                        _g.userName = _vote.candidacyName;
-                                        _g.userCode = req.body.userCode;
-                                        await _g.save();
-                                        Governor.find({}, ['userName', 'userCode', 'state']).sort({state: 1}).exec( function(err, result) {
-                                            if(err){
-                                                return common.send(res, 400, '', err);
-                                            }
-                                            else{
-                                                if(result.length > 0){
-                                                    return common.send(res, 200, result, 'Success');
-                                                }
-                                                else{
-                                                    return common.send(res, 400, '', 'server error');
-                                                }
-                                            }
-                                        });
+                                    if(result.length > 0){
+                                        return common.send(res, 200, result, 'Success');
+                                    }
+                                    else{
+                                        return common.send(res, 400, '', 'server error');
                                     }
                                 }
-                            })
-                        }
-                        else{
-                            return common.send(res, 300, '', 'Governor exists.');
+                            });
                         }
                     }
                 })
-                
+            }
+            else{
+                return common.send(res, 300, '', 'Governor Name exists.');
             }
         }
     });
