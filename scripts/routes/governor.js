@@ -41,7 +41,7 @@ exports.update = function(req, res) {
     if (req.body.id == undefined) {
         return common.send(res, 401, '', 'Id is undefined');
     }
-    if (req.body.userName == undefined && req.body.userName == '') {
+    if (req.body.userName == undefined || req.body.userName == '') {
         return common.send(res, 401, '', 'UserName is undefined or empty');
     }
 
@@ -59,21 +59,26 @@ exports.update = function(req, res) {
                         if (_g == undefined || _g == null) {
                             return common.send(res, 300, '', 'Undefined user.');
                         } else {
-                            _g.userName = req.body.userName;
-                            await _g.save();
-                            Governor.find({}, ['userName', 'userCode', 'state']).sort({state: 1}).exec( function(err, result) {
-                                if(err){
-                                    return common.send(res, 400, '', err);
-                                }
-                                else{
-                                    if(result.length > 0){
-                                        return common.send(res, 200, result, 'Success');
+                            if(_g.userCode){
+                                _g.userName = req.body.userName;
+                                await _g.save();
+                                Governor.find({}, ['userName', 'userCode', 'state']).sort({state: 1}).exec( function(err, result) {
+                                    if(err){
+                                        return common.send(res, 400, '', err);
                                     }
                                     else{
-                                        return common.send(res, 400, '', 'server error');
+                                        if(result.length > 0){
+                                            return common.send(res, 200, result, 'Success');
+                                        }
+                                        else{
+                                            return common.send(res, 400, '', 'server error');
+                                        }
                                     }
-                                }
-                            });
+                                });
+                            }
+                            else{
+                                return common.send(res, 300, '', 'User Code is empty.');
+                            }                            
                         }
                     }
                 })
