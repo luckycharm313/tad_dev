@@ -1,6 +1,6 @@
-# React Web3 Redux Todo Truffle Box
+# TAD
 
-This box comes with everything you need to start using smart contracts from a react app. This is as barebones as it gets, so nothing stands in your way.
+This tad comes with everything you need to start using smart contracts from a react app. This is as barebones as it gets, so nothing stands in your way.
 
 ## Installation
 
